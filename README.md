@@ -2,4 +2,4 @@
 
 
 ## Project's Journey
-- [ ] Create app 
+- [x] Create account app 
