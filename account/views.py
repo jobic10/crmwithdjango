@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+
 from .models import *
+
 # Create your views here.
 
 
@@ -28,5 +30,11 @@ def products(request):
 
 
 def customer(request, customer_id):
-    context = {}
+    customer = get_object_or_404(Customer, id=customer_id)
+    orders = customer.order_set.all()
+    context = {
+        'customer': customer,
+        'orders': orders,
+        'total_orders': orders.count()
+    }
     return render(request, "account/customer.html", context)
