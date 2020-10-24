@@ -13,6 +13,13 @@ class Customer(models.Model):
         return self.name
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     CATEGORY = [
         ('Indoor', 'Indoor'),
@@ -21,15 +28,9 @@ class Product(models.Model):
     name = models.CharField(max_length=50, null=True)
     price = models.FloatField()
     category = models.CharField(max_length=50, null=True, choices=CATEGORY)
+    tag = models.ManyToManyField(Tag)
     description = models.TextField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=50, null=True)
-
-    def __str__(self):
-        return self.name
 
 
 class Order(models.Model):
@@ -43,4 +44,3 @@ class Order(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=18, choices=STATUS)
     date_created = models.DateTimeField(auto_now_add=True)
-    tag = models.ManyToManyField(Tag)
