@@ -28,9 +28,12 @@ class Product(models.Model):
     name = models.CharField(max_length=50, null=True)
     price = models.FloatField()
     category = models.CharField(max_length=50, null=True, choices=CATEGORY)
+    description = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(Tag)
-    description = models.TextField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Order(models.Model):
@@ -44,3 +47,6 @@ class Order(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=18, choices=STATUS)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.customer}  ordered {self.product} with status : {self.status}"
