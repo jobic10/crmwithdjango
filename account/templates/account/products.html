@@ -11,11 +11,19 @@
 				<div class="card card-body">
 					<table class="table">
 						<tr>
+                            <th>Id</th>
 							<th>Product</th>
 							<th>Category</th>
 							<th>Price</th>
 						</tr>
-						
+						{% for product in products  %}
+                          <tr>
+                              <td>{{ forloop.counter }}</td>
+                              <td>{{ product.name }}</td>
+                              <td>{{ product.category }}</td>
+                              <td>&#8358; {{ product.price }}</td>
+                          </tr>
+                        {% endfor %}
 					</table>
 				</div>
 			</div>
