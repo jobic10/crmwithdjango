@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
 from .models import *
+from django.urls import reverse
 from django.contrib import messages
 # Create your views here.
 
@@ -47,5 +48,7 @@ def create_order(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Order created successfully!")
-            return redirect('/')
+            return redirect(reverse('create_order'))
+        else:
+            messages.error(request, "Invalid Form Submitted")
     return render(request, 'account/order_form.html', context)
