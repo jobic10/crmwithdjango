@@ -1,7 +1,26 @@
 {% extends 'account/main.html' %}
 {% block content %}
 {%  include 'account/status.html' %}
+{% if messages %}
+<div class='row'>
+  {% for message in messages  %}
+  
+  {% if message.tags == 'success' %}
+  <div class="col-md-12 alert alert-success" >
 
+    {{ message }}
+  </div>
+  {% else %}
+  <div class="col-md-12 alert alert-danger" >
+
+    {{ message }}
+  </div>
+  {% endif %}
+    
+  {% endfor %}
+</div>
+{% endif %}
+  
 <div class="row">
 	<div class="col-md-5">
 		<h5>CUSTOMERS ({{ total_customers }}) :</h5>
@@ -48,7 +67,7 @@
             <td>{{ order.date_created }}</td>
             <td>{{ order.status }}</td>
             <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
-            <td><a class="btn btn-sm btn-danger"  href="{% url 'update_order' order.id %}">Delete</a></td>
+            <td><a class="btn btn-sm btn-danger"  href="{% url 'delete_order' order.id %}">Delete</a></td>
         
         </tr>
         {% endfor %}

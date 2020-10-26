@@ -68,3 +68,13 @@ def update_order(request, order_id):
         else:
             messages.error(request, "Invalid Form Submitted")
     return render(request, 'account/order_form.html', context)
+
+
+def delete_order(request, order_id):
+    item = get_object_or_404(Order, id=order_id)
+    context = {'item': item}
+    if request.method == 'POST':
+        item.delete()
+        messages.success(request, 'Order deleted!')
+        return redirect('/')
+    return render(request, 'account/delete.html', context)

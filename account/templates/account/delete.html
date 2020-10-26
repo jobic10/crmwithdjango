@@ -1,0 +1,12 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+
+
+  <form action="" method='POST'>
+      {% csrf_token %}
+    <p>Are you sure you wanna delete "{{ item }}"</p>
+    <a href="{{ request.META.HTTP_REFERER }}" class='btn btn-info'>Cancel</a>
+      <input class='btn btn-danger' type="submit" value="Submit">
+  </form>
+{% endblock content %}
