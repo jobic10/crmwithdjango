@@ -1,8 +1,10 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+
 from .forms import *
 from .models import *
-from django.urls import reverse
-from django.contrib import messages
+
 # Create your views here.
 
 
@@ -49,6 +51,20 @@ def create_order(request):
             form.save()
             messages.success(request, "Order created successfully!")
             return redirect(reverse('create_order'))
+        else:
+            messages.error(request, "Invalid Form Submitted")
+    return render(request, 'account/order_form.html', context)
+
+
+def update_order(request, order_id):
+    instance = get_object_or_404(Order, id=order_id)
+    form = OrderForm(request.POST or None, instance=instance)
+    context = {'form': form}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Order updated successfully!")
+            return redirect(reverse('update_order', args=[order_id]))
         else:
             messages.error(request, "Invalid Form Submitted")
     return render(request, 'account/order_form.html', context)
