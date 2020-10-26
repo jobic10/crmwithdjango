@@ -1,12 +1,19 @@
 {% extends 'account/main.html' %}
 {% load static %}
 {% block content %}
-
-
-  <form action="" method='POST'>
-      {% csrf_token %}
-    <p>Are you sure you wanna delete "{{ item }}"</p>
-    <a href="{{ request.META.HTTP_REFERER }}" class='btn btn-info'>Cancel</a>
-      <input class='btn btn-danger' type="submit" value="Submit">
-  </form>
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card card-body">
+      <form action="" method='POST'>
+        {% csrf_token %}
+      <p>Are you sure you wanna delete "<span class='text-danger font-italic'>{{ item }}</span>"</p>
+      <a href="{{ request.META.HTTP_REFERER }}" class='btn btn-info'>Cancel</a>
+        <input class='btn btn-danger' type="submit" value="Submit">
+    </form>
+    
+    </div>
+  </div>
+</div>
+  
 {% endblock content %}
