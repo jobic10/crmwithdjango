@@ -1,7 +1,7 @@
-from django.shortcuts import get_object_or_404, render
-
+from django.shortcuts import get_object_or_404, render, redirect
+from .forms import *
 from .models import *
-
+from django.contrib import messages
 # Create your views here.
 
 
@@ -38,3 +38,14 @@ def customer(request, customer_id):
         'total_orders': orders.count()
     }
     return render(request, "account/customer.html", context)
+
+
+def create_order(request):
+    form = OrderForm(request.POST or None)
+    context = {'form': form}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Order created successfully!")
+            return redirect('/')
+    return render(request, 'account/order_form.html', context)

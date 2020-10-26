@@ -4,4 +4,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('products/', views.products, name='products'),
     path('customer/<int:customer_id>', views.customer, name='customer'),
+    path('create_order/', views.create_order, name='create_order')
 ]
