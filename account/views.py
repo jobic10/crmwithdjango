@@ -43,6 +43,20 @@ def customer(request, customer_id):
     return render(request, "account/customer.html", context)
 
 
+def create_order(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    form = OrderForm(request.POST or None, initial={'customer': customer})
+    context = {'form': form}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Order created successfully!")
+            return redirect(reverse('customer', args=[customer.id]))
+        else:
+            messages.error(request, "Invalid Form Submitted")
+    return render(request, 'account/order_form.html', context)
+
+
 def create_general_order(request):
     form = OrderForm(request.POST or None)
     context = {'form': form}
