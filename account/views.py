@@ -43,14 +43,14 @@ def customer(request, customer_id):
     return render(request, "account/customer.html", context)
 
 
-def create_order(request):
+def create_general_order(request):
     form = OrderForm(request.POST or None)
     context = {'form': form}
     if request.method == 'POST':
         if form.is_valid():
             form.save()
             messages.success(request, "Order created successfully!")
-            return redirect(reverse('create_order'))
+            return redirect(reverse('create_general_order'))
         else:
             messages.error(request, "Invalid Form Submitted")
     return render(request, 'account/order_form.html', context)
