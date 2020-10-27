@@ -4,31 +4,28 @@
 {% if messages %}
 <div class='row'>
   {% for message in messages  %}
-  
   {% if message.tags == 'success' %}
-  <div class="col-md-12 alert alert-success" >
-
+  <div class="col-md-12 alert alert-success">
     {{ message }}
   </div>
   {% else %}
-  <div class="col-md-12 alert alert-danger" >
-
+  <div class="col-md-12 alert alert-danger">
     {{ message }}
   </div>
   {% endif %}
-    
   {% endfor %}
 </div>
 {% endif %}
-  <br>
+<br>
 <div class="row">
   <div class="col-md-12">
     <div class="card card-body">
-  <form action="" method='POST'>
-      {% csrf_token %}
-      
-      {{ form }}
-      <input class='btn btn-primary' type="submit" value="Submit">
-  </form>
-  </div>  </div>  </div>  
+      <form action="" method='POST'>
+        {% csrf_token %}
+        {{ form }}
+        <input class='btn btn-primary' type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock content %}
