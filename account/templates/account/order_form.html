@@ -18,25 +18,33 @@
 {% endif %}
 
 <br>
-
-<form action="" method='POST'>
-  <div class="row">
-
-    {% csrf_token %}
-    {% for form in form %}
-    <div class="col-md-4">
-      <strong>
-        {{ form.label_tag }}
-      </strong>
-      {{ form }}
-    </div>
-    {% endfor %}
-    <div class="row">
-      <div class="col-md-12 m-4">
-
-        <input class='btn btn-primary' type="submit" value="Submit">
-      </div>
-    </div>
+<div class="card ">
+  <div class="card-header alert alert-primary">
+    Form
   </div>
-</form>
+
+  <div class="card-body">
+
+    <form action="" method='POST'>
+      <div class="row">
+
+        {% csrf_token %}
+        {% for form in form %}
+        <div class="col-md-4">
+          <strong>
+            {{ form.label_tag }}
+          </strong>
+          {{ form }}
+        </div>
+        {% endfor %}
+        <div class="row">
+          <div class="col-md-12 m-4">
+
+            <input class='btn btn-info' type="submit" value="Submit">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock content %}
