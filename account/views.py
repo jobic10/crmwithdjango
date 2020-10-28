@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-
+from django.forms import inlineformset_factory
 from .forms import *
 from .models import *
 
@@ -44,12 +44,16 @@ def customer(request, customer_id):
 
 
 def create_order(request, customer_id):
+    OrderFormSet = inlineformset_factory(
+        Customer, Order, fields=('product', 'status'))
     customer = get_object_or_404(Customer, id=customer_id)
-    form = OrderForm(request.POST or None, initial={'customer': customer})
-    context = {'form': form}
+    # form = OrderForm(request.POST or None, initial={'customer': customer})
+    formset = OrderFormSet(request.POST or None,
+                           instance=customer, queryset=Order.objects.none())
+    context = {'form': formset}
     if request.method == 'POST':
-        if form.is_valid():
-            form.save()
+        if formset.is_valid():
+            formset.save()
             messages.success(request, "Order created successfully!")
             return redirect(reverse('customer', args=[customer.id]))
         else:

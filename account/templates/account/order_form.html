@@ -10,25 +10,25 @@
   <div class="card-body">
 
     <form action="" method='POST'>
+
+      {% csrf_token %}
+      {{ form.management_form }}
+      {% for form in form %}
+
+      <strong>
+        {{ form.label_tag }}
+      </strong>
+      {{ form }}
+      <hr>
+      {% endfor %}
       <div class="row">
+        <div class="col-md-12 m-4">
 
-        {% csrf_token %}
-        {% for form in form %}
-        <div class="col-md-4">
-          <strong>
-            {{ form.label_tag }}
-          </strong>
-          {{ form }}
-        </div>
-        {% endfor %}
-        <div class="row">
-          <div class="col-md-12 m-4">
-
-            <input class='btn btn-info' type="submit" value="Submit">
-          </div>
+          <input class='btn btn-info' type="submit" value="Submit">
         </div>
       </div>
-    </form>
   </div>
+  </form>
+</div>
 </div>
 {% endblock content %}
