@@ -4,3 +4,6 @@
 media/
 */migrations/*
 db.sqlite3
+bin/
+lib/
+pyvenv.cfg
