@@ -1,21 +1,34 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt=""></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        {% url 'home' as home_url %}
-        <li class="nav-item {% if request.path == home_url %}active{% endif %}">
-          <a class="nav-link" href="{{ home_url }}">Dashboard</a>
-        </li>
-        {% url 'products' as products_url %}
-        <li class="nav-item  {% if request.path == products_url %}active{% endif %}">
-          <a class="nav-link" href="{{ products_url }}">Products</a>
-        </li>
-        
+  <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
 
-      </ul>
-    </div>
-  </nav>
+      {% if request.user.is_authenticated %}
+      {% url 'home' as home_url %}
+      <li class="nav-item {% if request.path == home_url %}active{% endif %}">
+        <a class="nav-link" href="{{ home_url }}">Dashboard</a>
+      </li>
+      {% url 'products' as products_url %}
+      <li class="nav-item  {% if request.path == products_url %}active{% endif %}">
+        <a class="nav-link" href="{{ products_url }}">Products</a>
+      </li>
+      {% else %}
+      {% url 'register' as register %}
+      <li class="nav-item {% if request.path == register %}active{% endif %}">
+        <a class="nav-link" href="{{ register }}">Register</a>
+      </li>
+      {% url 'login' as login %}
+      <li class="nav-item  {% if request.path == login %}active{% endif %}">
+        <a class="nav-link" href="{{ login }}">Login</a>
+      </li>
+      {% endif %}
+
+
+    </ul>
+  </div>
+</nav>

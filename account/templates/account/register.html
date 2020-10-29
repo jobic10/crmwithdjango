@@ -1,1 +1,22 @@
-<h1>Register</h1>
+{% extends 'account/main.html' %}
+{% block content %}
+<section class="container">
+    <div class="login-form">
+
+        <form action="" method="POST">
+            <h3>Registration Form</h3>
+            {% csrf_token %}
+            {% for field in form  %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+
+            {% endfor %}
+            <input type="submit" value="Create" class="btn btn-outline-primary">
+        </form>
+
+    </div>
+</section>
+{% endblock content %}

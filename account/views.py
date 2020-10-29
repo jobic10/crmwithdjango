@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.forms import inlineformset_factory
+from django.contrib.auth.forms import UserCreationForm
 from .forms import *
 from .models import *
 from .filters import *
@@ -108,5 +109,13 @@ def login(request):
 
 
 def register(request):
-    context = {}
+    form = CreateUserForm(request.POST or None)
+    context = {'form': form}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You are now registered!")
+            return redirect(reverse('login'))
+        else:
+            messages.error(request, "Please fix form errors!")
     return render(request, 'account/register.html', context)
