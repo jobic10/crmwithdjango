@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.forms import inlineformset_factory
 from .forms import *
 from .models import *
+from .filters import *
 
 # Create your views here.
 
@@ -35,10 +36,13 @@ def products(request):
 def customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
     orders = customer.order_set.all()
+    filter = OrderFilter(request.GET, queryset=orders)
+    orders = filter.qs
     context = {
         'customer': customer,
         'orders': orders,
-        'total_orders': orders.count()
+        'total_orders': orders.count(),
+        'filter': filter
     }
     return render(request, "account/customer.html", context)
 

@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #External (Pypi)
+    'django_filters',
+
     # My Apps
     'account.apps.AccountConfig',
 ]
