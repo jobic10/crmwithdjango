@@ -1,25 +1,6 @@
 {% extends 'account/main.html' %}
 {% block content %}
 {%  include 'account/status.html' %}
-{% if messages %}
-<div class='row'>
-    {% for message in messages  %}
-
-    {% if message.tags == 'success' %}
-    <div class="col-md-12 alert alert-success">
-
-        {{ message }}
-    </div>
-    {% else %}
-    <div class="col-md-12 alert alert-danger">
-
-        {{ message }}
-    </div>
-    {% endif %}
-
-    {% endfor %}
-</div>
-{% endif %}
 
 <div class="row">
     <div class="col-md-5">

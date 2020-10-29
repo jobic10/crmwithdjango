@@ -113,6 +113,9 @@ def delete_order(request, order_id):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        messages.warning(request, "You are logged in already!")
+        return redirect(reverse('home'))
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -128,6 +131,9 @@ def login(request):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        messages.warning(request, "You are logged in already!")
+    return redirect(reverse('home'))
     form = CreateUserForm(request.POST or None)
     context = {'form': form}
     if request.method == 'POST':
