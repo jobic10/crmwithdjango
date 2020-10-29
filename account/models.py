@@ -47,6 +47,7 @@ class Order(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=18, choices=STATUS)
     date_created = models.DateTimeField(auto_now_add=True)
+    note = models.CharField(max_length=100)
 
     def __str__(self):
         return f"{self.customer}  ordered {self.product} with status : {self.status}"
