@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as LOGIN, logout
 from .forms import *
 from .models import *
 from .filters import *
@@ -106,6 +106,16 @@ def delete_order(request, order_id):
 
 def login(request):
     context = {}
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is None:
+            messages.error(request, "Invalid credentials")
+        else:
+            LOGIN(request, user)
+            messages.success(request, "Welcome back!")
+            return redirect(reverse('home'))
     return render(request, 'account/login.html', context)
 
 
