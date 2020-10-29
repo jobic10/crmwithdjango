@@ -9,6 +9,7 @@
     <ul class="navbar-nav">
 
       {% if request.user.is_authenticated %}
+      <li class="nav-link text-info">Welcome, {{ user }}</li>
       {% url 'home' as home_url %}
       <li class="nav-item {% if request.path == home_url %}active{% endif %}">
         <a class="nav-link" href="{{ home_url }}">Dashboard</a>
@@ -17,9 +18,10 @@
       <li class="nav-item  {% if request.path == products_url %}active{% endif %}">
         <a class="nav-link" href="{{ products_url }}">Products</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item ">
         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
       </li>
+
       {% else %}
       {% url 'register' as register %}
       <li class="nav-item {% if request.path == register %}active{% endif %}">
