@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.forms import inlineformset_factory
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login as LOGIN, logout as LOGOUT
 from .forms import *
@@ -11,6 +12,7 @@ from .filters import *
 # Create your views here.
 
 
+@login_required(login_url='login')
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
@@ -29,12 +31,14 @@ def home(request):
     return render(request, "account/dashboard.html", context)
 
 
+@login_required(login_url='login')
 def products(request):
     products = Product.objects.all()
     context = {'products': products}
     return render(request, "account/products.html", context)
 
 
+@login_required(login_url='login')
 def customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
     orders = customer.order_set.all()
@@ -49,6 +53,7 @@ def customer(request, customer_id):
     return render(request, "account/customer.html", context)
 
 
+@login_required(login_url='login')
 def create_order(request, customer_id):
     OrderFormSet = inlineformset_factory(
         Customer, Order, fields=('product', 'status'))
@@ -67,6 +72,7 @@ def create_order(request, customer_id):
     return render(request, 'account/order_form.html', context)
 
 
+@login_required(login_url='login')
 def create_general_order(request):
     form = OrderForm(request.POST or None)
     context = {'form': form}
@@ -80,6 +86,7 @@ def create_general_order(request):
     return render(request, 'account/order_form.html', context)
 
 
+@login_required(login_url='login')
 def update_order(request, order_id):
     instance = get_object_or_404(Order, id=order_id)
     form = OrderForm(request.POST or None, instance=instance)
@@ -94,6 +101,7 @@ def update_order(request, order_id):
     return render(request, 'account/order_form.html', context)
 
 
+@login_required(login_url='login')
 def delete_order(request, order_id):
     item = get_object_or_404(Order, id=order_id)
     context = {'item': item}
