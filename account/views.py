@@ -113,7 +113,6 @@ def delete_order(request, order_id):
 
 
 def login(request):
-    context = {}
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -123,8 +122,9 @@ def login(request):
         else:
             LOGIN(request, user)
             messages.success(request, "Welcome back!")
+
             return redirect(reverse('home'))
-    return render(request, 'account/login.html', context)
+    return render(request, 'account/login.html')
 
 
 def register(request):
