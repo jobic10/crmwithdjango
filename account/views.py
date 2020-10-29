@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login as LOGIN, logout
+from django.contrib.auth import authenticate, login as LOGIN, logout as LOGOUT
 from .forms import *
 from .models import *
 from .filters import *
@@ -130,3 +130,12 @@ def register(request):
         else:
             messages.error(request, "Please fix form errors!")
     return render(request, 'account/register.html', context)
+
+
+def logout(request):
+    if request.user.is_authenticated:
+        LOGOUT(request)
+        messages.success(request, "Thanks for the time!")
+    else:
+        messages.error(request, 'You need to be signed in to sign out')
+    return redirect(reverse('login'))
