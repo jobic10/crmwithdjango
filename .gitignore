@@ -7,3 +7,4 @@ db.sqlite3
 bin/
 lib/
 pyvenv.cfg
+static/images/
