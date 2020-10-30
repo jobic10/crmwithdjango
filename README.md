@@ -12,3 +12,5 @@
 - [x] Update Order
 - [x] User authentication
 - [x] Logout User
+- [x] Decorators
+- [x] Image Upload
