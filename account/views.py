@@ -178,6 +178,14 @@ def userpage(request):
 @login_required
 @allowed_users(allowed_roles=['customer'])
 def account_settings(request):
-    form = CustomerForm()
+    form = CustomerForm(request.POST or None,
+                        request.FILES or None, instance=request.user.customer)
     context = {'form': form}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile Updated!")
+            return redirect(reverse('account'))
+        else:
+            messages.error(request, 'Form has error(s), please fix!')
     return render(request, 'account/account_settings.html', context)
