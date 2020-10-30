@@ -141,6 +141,7 @@ def register(request):
             user = form.save()
             group = Group.objects.get(name='customer')
             user.groups.add(group)
+            Customer.objects.create(user=user)
 
             messages.success(request, "You are now registered!")
             return redirect(reverse('login'))
