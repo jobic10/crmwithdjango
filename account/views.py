@@ -158,6 +158,11 @@ def logout(request):
     return redirect(reverse('login'))
 
 
+@login_required
+@allowed_users(allowed_roles=['customer'])
 def userpage(request):
-    context = {}
+    orders = request.user.customer.order_set.all()
+    context = {
+        'orders': orders
+    }
     return render(request, "account/user.html", context)
