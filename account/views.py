@@ -151,3 +151,8 @@ def logout(request):
     else:
         messages.error(request, 'You need to be signed in to sign out')
     return redirect(reverse('login'))
+
+
+def userpage(request):
+    context = {}
+    return render(request, "account/user.html", context)
