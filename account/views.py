@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login as LOGIN, logout as LOGOUT
 from .forms import *
 from .models import *
 from .filters import *
-
+from .decorators import *
 # Create your views here.
 
 
@@ -112,9 +112,8 @@ def delete_order(request, order_id):
     return render(request, 'account/delete.html', context)
 
 
+@unauthenticated_user
 def login(request):
-    if request.user.is_authenticated:
-        return redirect(reverse('home'))
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
