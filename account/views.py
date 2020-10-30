@@ -173,3 +173,11 @@ def userpage(request):
         'pending': pending
     }
     return render(request, "account/user.html", context)
+
+
+@login_required
+@allowed_users(allowed_roles=['customer'])
+def account_settings(request):
+    form = CustomerForm()
+    context = {'form': form}
+    return render(request, 'account/account_settings.html', context)

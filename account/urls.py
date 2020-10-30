@@ -14,5 +14,6 @@ urlpatterns = [
     path('update_order/<int:order_id>', views.update_order, name='update_order'),
     path('delete_order/<int:order_id>', views.delete_order, name='delete_order'),
     path('user/', views.userpage, name='userpage'),
+    path('account/', views.account_settings, name='account')
 
 ]
