@@ -162,7 +162,13 @@ def logout(request):
 @allowed_users(allowed_roles=['customer'])
 def userpage(request):
     orders = request.user.customer.order_set.all()
+    total_orders = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
     context = {
-        'orders': orders
+        'orders': orders,
+        'total_orders': total_orders,
+        'delivered': delivered,
+        'pending': pending
     }
     return render(request, "account/user.html", context)
