@@ -128,6 +128,7 @@ def login(request):
     return render(request, 'account/login.html')
 
 
+@unauthenticated_user
 def register(request):
     if request.user.is_authenticated:
         return redirect(reverse('home'))
