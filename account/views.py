@@ -13,6 +13,7 @@ from .decorators import *
 
 
 @login_required
+@allowed_users(allowed_roles=['admin'])
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
