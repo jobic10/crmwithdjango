@@ -10,7 +10,6 @@ from .forms import *
 from .models import *
 from .filters import *
 from .decorators import *
-# Create your views here.
 
 
 @login_required
