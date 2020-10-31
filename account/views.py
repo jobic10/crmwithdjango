@@ -185,3 +185,10 @@ def account_settings(request):
         else:
             messages.error(request, 'Form has error(s), please fix!')
     return render(request, 'account/account_settings.html', context)
+
+
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def create_customer(request):
+    context = {}
+    return render(request, 'account/create_customer.html', context)
