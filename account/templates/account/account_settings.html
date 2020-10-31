@@ -2,14 +2,6 @@
 {% load static %}
 {% block content %}
 
-<style>
-    .profile-pic {
-        max-width: 200px;
-        max-height: 200px;
-        margin: 0 auto;
-        border-radius: 50%;
-    }
-</style>
 
 <br>
 <div class="row">
@@ -19,7 +11,7 @@
             <hr>
             <h3 style="text-align: center">Account Settings</h3>
             <hr>
-            <img class="profile-pic img-thumbnail" src="{{request.user.customer.profile_pic.url}}">
+            <img class="img-thumbnail" src="{{request.user.customer.profile_pic.url}}">
 
         </div>
     </div>
