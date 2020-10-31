@@ -14,3 +14,4 @@
 - [x] Logout User
 - [x] Decorators
 - [x] Image Upload
+- [x] User signals (post_save)
