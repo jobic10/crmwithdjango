@@ -18,13 +18,13 @@ urlpatterns = [
     path('account/', views.account_settings, name='account'),
 
     # Start of password reset
-    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='account/password_reset.html'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='account/password_reset/password_reset.html'),
          name='reset_password'),
-    path('password_reset_sent/', auth_views.PasswordResetDoneView.as_view(template_name='account/password_reset_sent.html'),
+    path('password_reset_sent/', auth_views.PasswordResetDoneView.as_view(template_name='account/password_reset/password_reset_sent.html'),
          name='password_reset_done'),
-    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='account/password_reset_form.html'),
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='account/password_reset/password_reset_form.html'),
          name='password_reset_confirm'),
-    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='account/password_reset_done.html'),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='account/password_reset/password_reset_done.html'),
          name='password_reset_complete'),
 
 ]
