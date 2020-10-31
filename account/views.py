@@ -190,5 +190,6 @@ def account_settings(request):
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def create_customer(request):
-    context = {}
+    form = CreateUserForm(request.POST or None)
+    context = {'form': form}
     return render(request, 'account/create_customer.html', context)
