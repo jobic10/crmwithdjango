@@ -3,4 +3,4 @@ mysql-connector==2.2.9
 virtualenv==20.0.31
 Pillow==7.2.0
 django-filter==2.4.0
-
+psycopg2==2.8.6
