@@ -138,9 +138,6 @@ def register(request):
     if request.method == 'POST':
         if form.is_valid():
             user = form.save()
-            group = Group.objects.get(name='customer')
-            user.groups.add(group)
-            Customer.objects.create(user=user, name=user.username,)
 
             messages.success(request, "You are now registered!")
             return redirect(reverse('login'))
