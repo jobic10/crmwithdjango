@@ -6,3 +6,4 @@ class AccountConfig(AppConfig):
 
     def ready(self):
         import account.signals
+        print("HERE WE GO AGAIN LOLOLOLO")
