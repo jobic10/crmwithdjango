@@ -16,6 +16,8 @@ urlpatterns = [
     path('delete_order/<int:order_id>', views.delete_order, name='delete_order'),
     path('user/', views.userpage, name='userpage'),
     path('account/', views.account_settings, name='account'),
+
+    # Start of password reset
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='account/password_reset.html'),
          name='reset_password'),
     path('password_reset_sent/', auth_views.PasswordResetDoneView.as_view(template_name='account/password_reset_sent.html'),
