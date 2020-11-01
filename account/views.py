@@ -134,7 +134,7 @@ def register(request):
     if request.user.is_authenticated:
         return redirect(reverse('home'))
     form = CreateUserForm(request.POST or None)
-    context = {'form': form}
+    context = {'form': form, 'title': 'Sign up '}
     if request.method == 'POST':
         if form.is_valid():
             user = form.save()
@@ -143,7 +143,7 @@ def register(request):
             return redirect(reverse('login'))
         else:
             messages.error(request, "Please fix form errors!")
-    return render(request, 'account/register.html', context)
+    return render(request, 'account/form.html', context)
 
 
 def logout(request):
