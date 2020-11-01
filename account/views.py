@@ -33,6 +33,7 @@ def home(request):
 
 
 @login_required
+@admin_only
 def products(request):
     products = Product.objects.all()
     context = {'products': products}
@@ -40,6 +41,7 @@ def products(request):
 
 
 @login_required
+@admin_only
 def customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
     orders = customer.order_set.all()
@@ -108,6 +110,7 @@ def create_general_order(request):
 
 
 @login_required
+@admin_only
 def update_order(request, order_id):
     instance = get_object_or_404(Order, id=order_id)
     form = OrderForm(request.POST or None, instance=instance)
@@ -123,6 +126,7 @@ def update_order(request, order_id):
 
 
 @login_required
+@admin_only
 def delete_order(request, order_id):
     item = get_object_or_404(Order, id=order_id)
     context = {'item': item}
