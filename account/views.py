@@ -192,4 +192,11 @@ def account_settings(request):
 def create_customer(request):
     form = CreateUserForm(request.POST or None)
     context = {'form': form}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "New Customer added successfully!")
+            return redirect(reverse('create_customer'))
+        else:
+            messages.error(request, "Please fix form errors!")
     return render(request, 'account/create_customer.html', context)
