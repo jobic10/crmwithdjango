@@ -55,6 +55,7 @@ def customer(request, customer_id):
 
 
 @login_required
+@allowed_users(allowed_roles=['admin'])
 def create_order(request, customer_id):
     OrderFormSet = inlineformset_factory(
         Customer, Order, fields=('product', 'status'))
