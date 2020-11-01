@@ -12,14 +12,14 @@
                 <tr>
                     <th>Id</th>
                     <th>Customer</th>
-                    <th>Phone</th>
+                    <th>Email</th>
                     <th>View</th>
                 </tr>
                 {% for customer in customers  %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ customer.name }}</td>
-                    <td>{{ customer.phone }}</td>
+                    <td>{{ customer.user.email }}</td>
                     <td><a class='btn btn-sm btn-info' href="{% url 'customer' customer.id %}">View</a></td>
                 </tr>
                 {% endfor %}
