@@ -43,3 +43,10 @@ class CreateProductForm(ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
+
+
+class CustomerOrderForm(OrderForm):
+    class Meta(OrderForm.Meta):
+        model = Order
+        fields = '__all__'
+        exclude = ['status', 'customer']

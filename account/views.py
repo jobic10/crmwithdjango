@@ -55,6 +55,25 @@ def customer(request, customer_id):
 
 
 @login_required
+def order(request):
+    OrderFormSet = inlineformset_factory(
+        Customer, Order, fields=('product',), form=CustomerOrderForm)
+    customer = get_object_or_404(Customer, user=request.user)
+    # form = OrderForm(request.POST or None, initial={'customer': customer})
+    formset = OrderFormSet(request.POST or None,
+                           instance=customer, queryset=Order.objects.none())
+    context = {'form': formset, 'title': 'Create Order'}
+    if request.method == 'POST':
+        if formset.is_valid():
+            formset.save()
+            messages.success(request, "Order created successfully!")
+            return redirect(reverse('userpage'))
+        else:
+            messages.error(request, "Invalid Form Submitted")
+    return render(request, 'account/form.html', context)
+
+
+@login_required
 @allowed_users(allowed_roles=['admin'])
 def create_order(request, customer_id):
     OrderFormSet = inlineformset_factory(

@@ -21,7 +21,10 @@
         <a class="nav-link" href="{{ products_url }}">Products</a>
       </li>
       {% else %}
-      {% url 'account' as account %}
+      {% url 'order' as order %}
+      <li class="nav-item  {% if request.path == order %}active{% endif %}">
+        <a class="nav-link" href="{{ order }}">Create Order</a>
+      </li>
       <li class="nav-item  {% if request.path == account %}active{% endif %}">
         <a class="nav-link" href="{{ account }}">Settings</a>
       </li>
