@@ -200,3 +200,18 @@ def create_customer(request):
         else:
             messages.error(request, "Please fix form errors!")
     return render(request, 'account/create_customer.html', context)
+
+
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def create_product(request):
+    form = CreateProductForm(request.POST or None)
+    context = {'form': form}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "New Product added successfully!")
+            return redirect(reverse('create_product'))
+        else:
+            messages.error(request, "Please fix form errors!")
+    return render(request, 'account/create_product.html', context)
