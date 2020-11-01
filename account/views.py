@@ -106,7 +106,7 @@ def create_general_order(request):
             return redirect(reverse('create_general_order'))
         else:
             messages.error(request, "Invalid Form Submitted")
-    return render(request, 'account/order_form.html', context)
+    return render(request, 'account/form.html', context)
 
 
 @login_required
@@ -122,7 +122,7 @@ def update_order(request, order_id):
             return redirect(reverse('update_order', args=[order_id]))
         else:
             messages.error(request, "Invalid Form Submitted")
-    return render(request, 'account/order_form.html', context)
+    return render(request, 'account/form.html', context)
 
 
 @login_required
