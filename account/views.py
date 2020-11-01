@@ -191,7 +191,7 @@ def account_settings(request):
 @allowed_users(allowed_roles=['admin'])
 def create_customer(request):
     form = CreateUserForm(request.POST or None)
-    context = {'form': form}
+    context = {'form': form, 'title': 'Create Customer'}
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -199,7 +199,7 @@ def create_customer(request):
             return redirect(reverse('create_customer'))
         else:
             messages.error(request, "Please fix form errors!")
-    return render(request, 'account/create_customer.html', context)
+    return render(request, 'account/form.html', context)
 
 
 @login_required
