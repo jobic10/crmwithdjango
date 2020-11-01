@@ -62,7 +62,7 @@ def create_order(request, customer_id):
     # form = OrderForm(request.POST or None, initial={'customer': customer})
     formset = OrderFormSet(request.POST or None,
                            instance=customer, queryset=Order.objects.none())
-    context = {'form': formset}
+    context = {'form': formset, 'title': 'Create Order'}
     if request.method == 'POST':
         if formset.is_valid():
             formset.save()
@@ -70,7 +70,7 @@ def create_order(request, customer_id):
             return redirect(reverse('customer', args=[customer.id]))
         else:
             messages.error(request, "Invalid Form Submitted")
-    return render(request, 'account/order_form.html', context)
+    return render(request, 'account/form.html', context)
 
 
 @login_required
