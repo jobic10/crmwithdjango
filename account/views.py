@@ -143,7 +143,7 @@ def register(request):
             return redirect(reverse('login'))
         else:
             messages.error(request, "Please fix form errors!")
-    return render(request, 'account/form.html', context)
+    return render(request, 'account/register.html', context)
 
 
 def logout(request):
