@@ -10,6 +10,10 @@ class OrderForm(ModelForm):
         super(ModelForm, self).__init__(*args, **kwargs)
         for field in self.visible_fields():
             field.field.widget.attrs['class'] = 'form-control'
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            self.fields['customer'].disabled = True
+            self.fields['product'].disabled = True
 
     class Meta:
         model = Order
